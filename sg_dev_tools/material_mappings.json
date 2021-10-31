@@ -1,0 +1,44 @@
+{
+    "mappings":
+    [
+        {
+            "name":"UE4",
+            "map":{
+                "BaseColor":"Base Color",
+                "Opacity":"Alpha",
+                "OpacityMask":"Alpha",
+                "Metallic":"Metallic", 
+                "Roughness":"Roughness", 
+                "Normal":"Normal",
+                "Emissive":"Emission"
+            }
+        },
+        {
+            "name":"Standard",
+            "map":{
+                "Base Color":"Base Color",
+                "Opacity":"Alpha",
+                "OpacityMask":"Alpha",
+                "Metallic":"Metallic", 
+                "Roughness":"Roughness", 
+                "Normal":"Normal",
+                "Emissive":"Emission"
+            }
+        },
+        {
+            "name":"Standard",
+            "map":{
+                "Diffuse":"Base Color",
+                "Opacity":"Alpha",
+                "OpacityMask":"Alpha",
+                "Metallic":"Metallic", 
+                "Roughness":"Roughness", 
+                "Normal":"Normal",
+                "Emissive":"Emission"
+            }
+        }
+
+    ]
+    
+    
+}
