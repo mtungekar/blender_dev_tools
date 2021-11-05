@@ -9,9 +9,22 @@ class SgImporter_OT_MultiImporter(bpy.types.Operator):
     def execute(self,context):
         #Find obj
         import_path = get_import_path(context.scene)
+        import_extensions = ('*.obj','*.sgscene','*.sg','*.glb','*.gltf')
+        files_to_load_map = {}
+        for ext in import_extensions:
+            files_to_load_map[ext.lstrip('*.')] = list(import_path.glob('*.obj'))
         # Improt and link files
-        for import_file_path in import_path.glob('*.obj'):
-            bpy.ops.import_scene.obj(filepath=str(import_file_path),axis_forward='X', axis_up='Y')
+        for key,value in files_to_load_map.items():
+            for import_file_path in value:
+                if key == 'obj':
+                    bpy.ops.import_scene.obj(filepath=str(import_file_path),axis_forward='X', axis_up='Y')
+                elif key == 'sg' or key == 'sgscene':
+                    bpy.ops.import_scene.sgscene(filepath=str(import_file_path),axis_forward='X', axis_up='Y')
+                elif key == 'glb' or key == "gltf":
+                    bpy.ops.import_scene.gltf(filepath=str(import_file_path))
+                elif key == 'fbx':
+                    bpy.ops.import_scene.fbx(filepath=str(import_file_path))
+
             for importe_obj in context.selected_objects:
                 importe_obj.import_file_path = import_file_path.name
 

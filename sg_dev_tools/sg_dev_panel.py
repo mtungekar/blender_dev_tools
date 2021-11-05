@@ -32,5 +32,5 @@ class SgDev_PT_SgSceneImport(bpy.types.Panel):
     def draw(self, context):
         layout = self.layout
         col = layout.column(align=True)
-        col.operator('simplygon.sg_scene_import_operator')
+        col.operator('import_scene.sgscene')
 

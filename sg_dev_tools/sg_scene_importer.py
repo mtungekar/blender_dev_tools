@@ -19,9 +19,11 @@ from .sg_mesh_handler import BlenderMeshHelper
 
 #global variable
 mappings_json = object()
+
+@bpy_extras.io_utils.orientation_helper(axis_forward='X', axis_up='Y')
 class SgImporter_OT_ImportSgScene(bpy.types.Operator, bpy_extras.io_utils.ImportHelper):
     # important since its how bpy.ops.import_test.some_data is constructed
-    bl_idname = "simplygon.sg_scene_import_operator"
+    bl_idname = "import_scene.sgscene"
     bl_label = "Simplygon(.sgscene)"
     filename_ext = ".sgscene"
     bl_options = {'REGISTER', 'UNDO'}
@@ -95,12 +97,32 @@ class SgImporter_OT_ImportSgScene(bpy.types.Operator, bpy_extras.io_utils.Import
         layout.prop(self, 'material_mapping')
         
     def execute(self, context):
+        
+        import_settings = self.as_keywords(
+            ignore=(
+                "axis_forward",
+                "axis_up",
+                "filter_glob",
+            ),
+        )
+
+        global_matrix = axis_conversion(
+            from_forward=self.axis_forward,
+            from_up=self.axis_up,
+        ).to_4x4()
+        import_settings["global_matrix"] = global_matrix
         return self.import_sg_scene(context)
 
     
    
-    def import_sg_scene(self, context):
-        import_settings = self.as_keywords()
+    def import_sg_scene(self, 
+        context, 
+        *,
+        import_meshes = True,
+        import_materials = False, 
+        import_textures = False, 
+        import_cameras = False):
+        
         sg = simplygon_loader.init_simplygon()
         if sg is not None:
             self.read_scene(context,sg)
