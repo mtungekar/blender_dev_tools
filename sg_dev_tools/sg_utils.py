@@ -1,4 +1,5 @@
 from __future__ import print_function
+from os import path
 import sys
 import json
 import bpy
@@ -28,7 +29,10 @@ def get_material_name(sg_material, material_index):
     return material_name
 
 def import_material_mappings(file_path):
-    with open(file_path, 'r') as mapping_json:
+    fullpath = pathlib.Path(__file__).parent / pathlib.Path(file_path)
+    if not fullpath.is_file():
+        raise RuntimeError(f'mappings json not found{fullpath}')
+    with open(fullpath, 'r') as mapping_json:
         data = mapping_json.read()
     return json.loads(data, object_hook=lambda d: SimpleNamespace(**d))
 

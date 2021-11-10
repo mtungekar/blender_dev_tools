@@ -1,3 +1,4 @@
+import pathlib
 import bpy
 import bpy_extras
 import math
