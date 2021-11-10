@@ -107,7 +107,7 @@ class SgImporter_OT_ImportSgScene(bpy.types.Operator, bpy_extras.io_utils.Import
             ),
         )
 
-        global_matrix = axis_conversion(
+        global_matrix = bpy_extras.io_utils.axis_conversion(
             from_forward=self.axis_forward,
             from_up=self.axis_up,
         ).to_4x4()
