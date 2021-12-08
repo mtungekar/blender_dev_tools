@@ -26,14 +26,15 @@
             }
         },
         {
-            "name":"Standard",
+            "name":"Max",
             "map":{
-                "Diffuse":"Base Color",
-                "Opacity":"Alpha",
-                "OpacityMask":"Alpha",
+                "Ambient_Color":"Base Color",
+                "Diffuse_Color":"Base Color",
+                "Opacity":"Opacity",
+                "OpacityMask":"Opacity",
                 "Metallic":"Metallic", 
                 "Roughness":"Roughness", 
-                "Normal":"Normal",
+                "Bump":"Normal",
                 "Emissive":"Emission"
             }
         }
