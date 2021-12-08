@@ -51,5 +51,5 @@ def create_mapping_list(json_object):
 def get_material_mapping(json_object, name):
      kvp = {}
      for i in json_object.mappings:
-         if i.name == name:
+         if i.name.upper() == name:
             return i.map.__dict__
