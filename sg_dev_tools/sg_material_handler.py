@@ -64,6 +64,10 @@ class BlenderMaterialHelper:
         
         for i in range(0,channels.GetItemCount()):
             channel = channels.GetItem(i)
+
+            if channel not in BlenderMaterialHelper.sg_channel_to_blender_node:
+                continue
+
             sg_shading_node = sg_material.GetShadingNetwork(channel)
             sg_texture_node = Simplygon.spShadingTextureNode.SafeCast(sg_shading_node)
             sg_color_node = Simplygon.spShadingColorNode.SafeCast(sg_shading_node)
@@ -87,7 +91,7 @@ class BlenderMaterialHelper:
                 b = sg_color_node.GetDefaultParameterBlue(0)
                 a = sg_color_node.GetDefaultParameterAlpha(0)
                 current_socket =  pbr_node.inputs[BlenderMaterialHelper.sg_channel_to_blender_node[channel]]
-                
+                print(f'{channel} SocketType {current_socket.type}')
                 color_value = [r,g,b,a]
                 if BlenderMaterialHelper.is_vector_node(current_socket):
                     pbr_node.inputs[BlenderMaterialHelper.sg_channel_to_blender_node[channel]].default_value = color_value[:3]
