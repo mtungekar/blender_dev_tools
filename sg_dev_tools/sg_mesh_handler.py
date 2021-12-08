@@ -64,7 +64,13 @@ class BlenderMeshHelper:
                 new_mesh.polygons.foreach_set('material_index',material_ids.GetData())
 
             for i in unique_ids:
-                new_mesh.materials.append(bpy.data.materials[material_lookup[i]])
+                if i not in material_lookup:
+                     blender_material_name =f'Material{i}'
+                     bpy.data.materials.new(blender_material_name)
+                else:
+                    blender_material_name = material_lookup[i]
+                    
+                new_mesh.materials.append(bpy.data.materials[blender_material_name])
         
         new_mesh.validate(verbose=False)
         new_mesh.update()    
