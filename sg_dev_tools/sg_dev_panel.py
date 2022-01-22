@@ -21,6 +21,7 @@ class SgDev_PT_MultiFileImport(bpy.types.Panel):
         else:
             col.label(text='no object present')
 
+
 class SgDev_PT_SgSceneImport(bpy.types.Panel):
     """Creates a Panel for Internal Simplygon Development Tools"""
     bl_label = "SgScene"
