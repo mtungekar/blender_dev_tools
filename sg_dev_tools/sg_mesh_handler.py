@@ -20,6 +20,7 @@ class BlenderMeshHelper:
         material_ids = sg_geom.GetMaterialIds()
         unique_ids = get_unique_ids(material_ids.GetData())
         new_mesh = bpy.data.meshes.new(mesh_name)
+        group_ids = sg_geom.GetGroupIds()
         
         #vertex data
         new_mesh.vertices.add(num_vertices)
@@ -54,7 +55,8 @@ class BlenderMeshHelper:
         new_mesh.polygons.foreach_set('loop_start', loop_starts)
         new_mesh.polygons.foreach_set('loop_total', loop_totals)
 
-       
+        faces_use_smooth = tuple(bool(context_smooth_group) for (_, _, _, _, context_smooth_group, _, _) in faces)
+        new_mesh.polygons.foreach_set("use_smooth", faces_use_smooth)
         
         #hookup materials
         if not material_lookup:
