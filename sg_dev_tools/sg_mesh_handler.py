@@ -55,8 +55,9 @@ class BlenderMeshHelper:
         new_mesh.polygons.foreach_set('loop_start', loop_starts)
         new_mesh.polygons.foreach_set('loop_total', loop_totals)
 
-        faces_use_smooth = tuple(bool(context_smooth_group) for (_, _, _, _, context_smooth_group, _, _) in faces)
-        new_mesh.polygons.foreach_set("use_smooth", faces_use_smooth)
+        #faces_use_smooth = tuple(bool(context_smooth_group) for (_, _, _, _, context_smooth_group, _, _) in faces)
+        #new_mesh.polygons.foreach_set("use_smooth", faces_use_smooth)
+        new_mesh.polygons.foreach_set('use_smooth',  [True] * num_triangles)
         
         #hookup materials
         if not material_lookup:
