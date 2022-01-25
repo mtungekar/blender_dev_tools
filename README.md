@@ -1,8 +1,9 @@
 # Debugging tools
 
-Blender tools to debug issues with Simplygon API Scene.
-This is small set of blender utilities that I wrote to 
-debug Simplygon issues.
+Started as a weekend project in Summer 2020 to debug issues.
+From a simple script to review Visibility Camera placements.
+Mainly allows users to import Simplygon Scene into blender
+for reviewing. 
 
 ## Requirements
 [Simplygon 9.0+](https://www.simplygon.com) (Free Version) 
@@ -15,6 +16,13 @@ VSCode Extension Blender Development (by Jacques Lucke)
 Flake8
 
 ### Change Log
+
+2022-01-25 (version 0.5.0)
+*Squash history for public release
+*Added material mapping json
+*Update VSCode workspace 
+*Flake8 for linting
+*Added blender_autocomplete as submodule instead.
 
 2021-10-31 (version 0.2.0)
 *Added multi file import and reload for OBJ files
