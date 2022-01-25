@@ -1,7 +1,20 @@
-# blender_dev_tools
-Blender tools to debug issues. 
+# Debugging tools
 
-Change Log
+Blender tools to debug issues with Simplygon API Scene.
+This is small set of blender utilities that I wrote to 
+debug Simplygon issues.
+
+## Requirements
+[Simplygon 9.0+](https://www.simplygon.com) (Free Version) 
+[Blender 2.8+](https://www.blender.com)
+
+## Development
+VStudio Code IDE
+Python 3.7+ (Need to match with Blender's python)
+VSCode Extension Blender Development (by Jacques Lucke)
+Flake8
+
+### Change Log
 
 2021-10-31 (version 0.2.0)
 *Added multi file import and reload for OBJ files
@@ -14,7 +27,7 @@ Change Log
 
 2020-09-23 (version 0.1.1)
 *Minor adjustments to how mesh is setup
-*Bug files
+*Bug fixes
 
 2020-08-13 (version 0.1.0)
 *Moved to blender add-on
