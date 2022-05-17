@@ -1,3 +1,18 @@
 {
+    "python.autoComplete.extraPaths": [
+        "${workspaceFolder}/blender_autocomplete/3.10",
+        "${env:APPDATA}/Python/Python37/site-packages"
+    ],
+    "python.linting.pylintArgs": [
+        "--init-hook",
+        "import sys;sys.append('${env:APPDATA}/Python/Python37/site-packages');sys.path.append('${workspaceFolder}/blender_autocomplete/3.10');"
+    ],
+    "python.analysis.extraPaths": [
+        "${workspaceFolder}/blender_autocomplete/3.10",
+        "${env:APPDATA}/Python/Python37/site-packages"
+    ],
+    "python.pythonPath": "${env:LOCALAPPDATA}/Programs/Python/Python37/python.exe",	
+    "python.linting.enabled": true,
+    "python.linting.flake8Enabled": true,
     "cSpell.enabled": true
 }

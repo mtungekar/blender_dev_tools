@@ -22,10 +22,9 @@ def get_unique_ids(material_ids):
     return unique_ids
 
 def get_material_name(sg_material, material_index):
-    material_name = sg_material.GetName()
-    if material_name is None:
-        material_name = "Material_"+str(material_index)
-
+    material_name = "Material_"+str(material_index)
+    if sg_material is not None:
+        material_name = sg_material.GetName()
     return material_name
 
 def import_material_mappings(file_path):

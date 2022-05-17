@@ -2,6 +2,7 @@ import bpy
 from simplygon import Simplygon
 import numpy as np
 from .sg_utils import get_unique_ids
+from .sg_utils import get_material_name
 
 class BlenderMeshHelper:
     
@@ -60,20 +61,18 @@ class BlenderMeshHelper:
         new_mesh.polygons.foreach_set('use_smooth',  [True] * num_triangles)
         
         #hookup materials
-        if not material_lookup:
-            print ('no material')
-        else:
-            if material_ids is not None:
-                new_mesh.polygons.foreach_set('material_index',material_ids.GetData())
-
-            for i in unique_ids:
-                if i not in material_lookup:
-                     blender_material_name =f'Material{i}'
-                     bpy.data.materials.new(blender_material_name)
-                else:
-                    blender_material_name = material_lookup[i]
-                    
+        for matId in unique_ids:
+            if matId not in material_lookup:
+                blender_material_name = get_material_name(None, matId)
+                bpy.data.materials.new(blender_material_name)
+                material_lookup[matId] = blender_material_name
                 new_mesh.materials.append(bpy.data.materials[blender_material_name])
+            else:
+                blender_material_name = material_lookup[matId]
+                new_mesh.materials.append(bpy.data.materials[blender_material_name])
+                
+        if material_ids is not None:
+            new_mesh.polygons.foreach_set('material_index',material_ids.GetData())
         
         new_mesh.validate(verbose=False)
         new_mesh.update()    
