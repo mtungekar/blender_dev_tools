@@ -16,6 +16,13 @@ def get_texture_coord_name(uv_index) -> str:
     name = 'Texcoord%03d'%uv_index
     return name
 
+def get_polygons_with_material_id(material_ids, id):
+    result = 0
+    for x in material_ids:
+        if x == id:
+            result += 1
+    return result
+
 def get_unique_ids(material_ids):
     used = set()
     unique_ids = [id for id in material_ids if id not in used and (used.add(id) or True)]

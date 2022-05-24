@@ -3,7 +3,7 @@ from simplygon import Simplygon
 import numpy as np
 from .sg_utils import get_unique_ids
 from .sg_utils import get_material_name
-
+from .sg_utils import get_polygons_with_material_id
 class BlenderMeshHelper:
     
     def __new__(cls, *args, **kwargs):
@@ -22,6 +22,12 @@ class BlenderMeshHelper:
         unique_ids = get_unique_ids(material_ids.GetData())
         new_mesh = bpy.data.meshes.new(mesh_name)
         group_ids = sg_geom.GetGroupIds()
+
+        for id in unique_ids:
+            triCount = get_polygons_with_material_id(material_ids.GetData(),id)
+            print(f'Material:{id} Tris:{triCount} ')
+
+        
         
         #vertex data
         new_mesh.vertices.add(num_vertices)
@@ -71,7 +77,7 @@ class BlenderMeshHelper:
                 blender_material_name = material_lookup[matId]
                 new_mesh.materials.append(bpy.data.materials[blender_material_name])
                 
-        if material_ids is not None:
+        if not material_ids.IsNull():
             new_mesh.polygons.foreach_set('material_index',material_ids.GetData())
         
         new_mesh.validate(verbose=False)
