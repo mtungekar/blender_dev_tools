@@ -10,8 +10,8 @@ import threading
 import numpy as np
 
 from pathlib import Path
-from simplygon import simplygon_loader
-from simplygon import Simplygon
+from simplygon10 import simplygon_loader
+from simplygon10 import Simplygon
 from . import sg_utils
 from .sg_texture_handler import SGTextureHandler
 from .sg_material_handler import SGMaterialHandler
@@ -133,7 +133,7 @@ class SgImporter_OT_ImportSgScene(bpy.types.Operator, bpy_extras.io_utils.Import
     def read_scene(self, context, sg):
         importer = sg.CreateSceneImporter()
         importer.SetImportFilePath( self.filepath )
-        if not importer.RunImport():
+        if Simplygon.Failed(importer.Run()):
             raise Exception('Failed to load import')
         sg_scene = importer.GetScene()
         if sg_scene is None:

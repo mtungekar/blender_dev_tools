@@ -1,5 +1,5 @@
 import bpy
-from simplygon import Simplygon
+from simplygon10 import Simplygon
 from .sg_utils import get_texture_coord_name
 
 class BlenderMaterialHelper:

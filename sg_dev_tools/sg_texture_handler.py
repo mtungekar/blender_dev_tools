@@ -1,8 +1,9 @@
+import pathlib
 import bpy
 import tempfile
 import os
 from os.path import dirname, join, isfile, basename, normpath
-from simplygon import Simplygon
+from simplygon10 import Simplygon
 
 
 class SGTextureHandler:
@@ -29,6 +30,11 @@ class SGTextureHandler:
         if image_data is not None:
             texture.ExportImageData()
             texture_path = texture.GetFilePath()
+        
+        fileExt = pathlib.Path(texture_path).suffix
+
+        if fileExt == '':
+            texture_path = texture_path+'.png'
 
         num_images = len(bpy.data.images)
 

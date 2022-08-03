@@ -1,5 +1,5 @@
 import bpy
-from simplygon import Simplygon
+from simplygon10 import Simplygon
 import numpy as np
 from .sg_utils import get_unique_ids
 from .sg_utils import get_material_name
@@ -23,11 +23,9 @@ class BlenderMeshHelper:
         new_mesh = bpy.data.meshes.new(mesh_name)
         group_ids = sg_geom.GetGroupIds()
 
-        for id in unique_ids:
-            triCount = get_polygons_with_material_id(material_ids.GetData(),id)
-            print(f'Material:{id} Tris:{triCount} ')
-
-        
+        #for id in unique_ids:
+        #    triCount = get_polygons_with_material_id(material_ids.GetData(),id)
+        #    print(f'Material:{id} Tris:{triCount} ')
         
         #vertex data
         new_mesh.vertices.add(num_vertices)
@@ -67,16 +65,20 @@ class BlenderMeshHelper:
         new_mesh.polygons.foreach_set('use_smooth',  [True] * num_triangles)
         
         #hookup materials
+        local_to_global = {}
         for matId in unique_ids:
             if matId not in material_lookup:
                 blender_material_name = get_material_name(None, matId)
-                bpy.data.materials.new(blender_material_name)
+                index = bpy.data.materials.new(blender_material_name)
+                local_to_global[index] = matId
                 material_lookup[matId] = blender_material_name
                 new_mesh.materials.append(bpy.data.materials[blender_material_name])
             else:
                 blender_material_name = material_lookup[matId]
                 new_mesh.materials.append(bpy.data.materials[blender_material_name])
-                
+
+        #for k,v in local_to_global:
+
         if not material_ids.IsNull():
             new_mesh.polygons.foreach_set('material_index',material_ids.GetData())
         
