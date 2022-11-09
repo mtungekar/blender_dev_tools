@@ -25,13 +25,13 @@ mappings_json = object()
 class SgImporter_OT_ImportSgScene(bpy.types.Operator, bpy_extras.io_utils.ImportHelper):
     # important since its how bpy.ops.import_test.some_data is constructed
     bl_idname = "import_scene.sgscene"
-    bl_label = "Simplygon(.sgscene)"
-    filename_ext = ".sgscene"
+    bl_label = "Simplygon(.sgscene|.sg|.sb)"
+    
     bl_options = {'REGISTER', 'UNDO'}
     
 
     filter_glob: bpy.props.StringProperty(
-        default="*.sgscene",
+        default='*.sgscene;*.sb;*.sg',
         options={'HIDDEN'},
         maxlen=255,  # Max internal buffer length, longer would be clamped.
     )
