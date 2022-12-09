@@ -36,6 +36,7 @@ class BlenderMeshHelper:
         new_mesh.loops.foreach_set('vertex_index',  vertex_ids.GetData())
         new_mesh.loops.foreach_set('normal', normals.GetData())
         
+        
         if bitangents is not None:
             new_mesh.loops.foreach_set('bitangent', bitangents.GetData())
 
@@ -48,6 +49,16 @@ class BlenderMeshHelper:
                     break
                 
                 new_uv_layer.data.foreach_set('uv',sg_geom.GetTexCoords(uv_index).GetData())
+
+        for color_index in range(0,255):
+            if sg_geom.GetColors(color_index) is not None:
+                color_set_name = 'Color%03d'%color_index
+                new_vc_layer = new_mesh.vertex_colors.new(name=color_set_name)
+                if new_vc_layer is None:
+                    print("Color limit reached")
+                    break
+                
+                new_vc_layer.data.foreach_set('color',sg_geom.GetColors(color_index).GetData())
         
         new_mesh.polygons.add(num_triangles)
         

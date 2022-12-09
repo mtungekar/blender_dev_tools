@@ -199,7 +199,6 @@ class SgImporter_OT_ImportSgScene(bpy.types.Operator, bpy_extras.io_utils.Import
             print("SelectionSetMeshes:%d "%selection_set_id2)
             for set_index in range(selection_set.GetItemCount()):
                 node_guid = selection_set.GetItem(set_index)
-                print(node_guid)
                 temp_node = sg_scene.GetNodeByGUID(node_guid)
                 if temp_node is None:
                     raise Exception('Failed to fetch node')
@@ -218,5 +217,11 @@ class SgImporter_OT_ImportSgScene(bpy.types.Operator, bpy_extras.io_utils.Import
                     vis_camera_obj.empty_display_size = 0.01
                     # vis_camera_obj.scale = (0.001, 0.001, 0.001)
                     sg_collection.objects.link(vis_camera_obj)
-                    
+        
+        select_set_table = sg_scene.GetSelectionSetTable()
+        if select_set_table is not None:
+            print(f'Number of selection sets {select_set_table.GetItemsCount()}')
+        for set_index in range(select_set_table.GetItemsCount()):
+                selection_set = select_set_table.GetSelectionSet(set_index)
+                print(f'Set at {set_index} is {selection_set.GetName()} with {selection_set.GetItemCount()} items.')
         
