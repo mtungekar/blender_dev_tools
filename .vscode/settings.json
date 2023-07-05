@@ -11,8 +11,13 @@
         "${workspaceFolder}/blender_autocomplete/3.10",
         "${env:APPDATA}/Python/Python37/site-packages"
     ],
-    "python.pythonPath": "${env:LOCALAPPDATA}/Programs/Python/Python37/python.exe",	
+    "python.pythonPath": "${env:LOCALAPPDATA}/Programs/Python/Python37/python.exe",
     "python.linting.enabled": true,
     "python.linting.flake8Enabled": true,
-    "cSpell.enabled": true
+    "cSpell.enabled": true,
+    "[python]": {
+        "editor.defaultFormatter": "ms-python.autopep8"
+    },
+    "python.formatting.provider": "none",
+    "blender.addon.reloadOnSave": true
 }
